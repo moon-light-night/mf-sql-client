@@ -5,7 +5,7 @@ SQL Client для безопасного выполнения пользоват
 ## Технологии
 
 - Frontend: Vue 3 + Vite + TypeScript + Pinia + Tailwind + PrimeVue
-- Микрофронтенды: Module Federation
+- Microfrontends: Module Federation
 - Backend: Go + gRPC
 - Прокси: Envoy (gRPC-Web)
 - БД:

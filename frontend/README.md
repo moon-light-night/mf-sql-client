@@ -1,6 +1,6 @@
 # Frontend SQL Client
 
-Frontend построен как микрофронтенд-монорепозиторий: `host` + `remote` (`sql-workbench`) + общие пакеты в `packages`
+Frontend построен на архитектуре микрофронтендов: `host` + `remote` (`sql-workbench`) + общие пакеты в `packages`
 
 ## Дерево frontend
 
