@@ -3,6 +3,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/composables": ["./src/composables/index.ts"],
+      "@/consts": ["./src/consts/index.ts"],
+      "@/stores": ["./src/stores/index.ts"],
+      "@/types": ["./src/types/index.ts"],
       "@/*": ["./src/*"],
       "@api/*": ["../../packages/api/src/*"],
       "@sql-client/types": ["../../packages/types/src/index.ts"],

@@ -9,6 +9,10 @@
   },
   "scripts": {
     "generate": "protoc --plugin=protoc-gen-ts=../../../node_modules/.bin/protoc-gen-ts -I=../../../proto ../../../proto/sqlclient/v1/sql_client.proto --ts_out=./src/gen --ts_opt=generate_dependencies",
+    "checkTypes": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "npm run checkTypes",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "npm run lint -- --fix",
     "test": "vitest run"
   },
   "dependencies": {
@@ -20,6 +24,7 @@
   },
   "devDependencies": {
     "@protobuf-ts/plugin": "^2.11.1",
+    "typescript": "^5.4.5",
     "vitest": "^2.1.8"
   }
 }

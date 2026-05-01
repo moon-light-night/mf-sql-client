@@ -4,7 +4,7 @@ import { computed, onMounted } from 'vue'
 import { WORKBENCH_BUTTON_STYLES } from '@/consts/buttonStyles'
 import { WORKBENCH_ERROR_MESSAGES, WORKBENCH_UI_TEXTS } from '@/consts'
 import { useSqlWorkbenchStore } from '@/stores'
-import { useQueryHistory } from '@/composables/index'
+import { useQueryHistory } from '@/composables'
 import { HistoryEntry } from '@sql-client/types'
 
 const store = useSqlWorkbenchStore()

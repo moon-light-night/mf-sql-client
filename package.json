@@ -10,6 +10,17 @@
     "dev:host": "npm run dev --workspace=frontend/apps/host",
     "dev:workbench": "npm run dev --workspace=frontend/apps/sql-workbench",
     "build": "npm run build --workspace=frontend/packages/frontend-config --workspace=frontend/packages/types --workspace=frontend/packages/api && npm run build --workspace=frontend/apps/sql-workbench && npm run build --workspace=frontend/apps/host",
-    "typecheck": "npm run typecheck --workspace=frontend/apps/host --workspace=frontend/apps/sql-workbench --if-present"
+    "checkTypes": "npm run checkTypes --workspaces --if-present",
+    "typecheck": "npm run checkTypes",
+    "lint": "npm run lint --workspaces --if-present",
+    "lint:fix": "npm run lint:fix --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-vue": "^9.25.0",
+    "globals": "^15.15.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.31.1"
   }
 }
