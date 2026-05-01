@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@api/*": ["../../packages/api/src/*"],
+      "@sql-client/types": ["../../packages/types/src/index.ts"],
+      "@sql-client/config": ["../../packages/frontend-config/src/index.ts"],
+      "@sql-client/api": ["../../packages/api/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*", "../../packages/*/src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

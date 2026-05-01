@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["./src/*"],
+      "@sql-client/types": ["../types/src/index.ts"],
+      "@sql-client/config": ["../frontend-config/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*", "vitest.config.ts", "../types/src/**/*", "../frontend-config/src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

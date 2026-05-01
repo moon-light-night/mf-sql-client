@@ -1,0 +1,25 @@
+{
+  "name": "@sql-client/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "generate": "protoc --plugin=protoc-gen-ts=../../../node_modules/.bin/protoc-gen-ts -I=../../../proto ../../../proto/sqlclient/v1/sql_client.proto --ts_out=./src/gen --ts_opt=generate_dependencies",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@protobuf-ts/grpcweb-transport": "^2.11.1",
+    "@protobuf-ts/runtime": "^2.11.1",
+    "@protobuf-ts/runtime-rpc": "^2.11.1",
+    "@sql-client/config": "*",
+    "@sql-client/types": "*"
+  },
+  "devDependencies": {
+    "@protobuf-ts/plugin": "^2.11.1",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,8 @@
+export { default as QueryHistory } from '@/components/query-history/QueryHistory.vue'
+export { default as QueryStatus } from '@/components/query-status/QueryStatus.vue'
+export { default as QueryToolbar } from '@/components/query-toolbar/QueryToolbar.vue'
+export { default as ResultTable } from '@/components/result-table/ResultTable.vue'
+export { default as SchemaExplorer } from '@/components/schema-explorer/SchemaExplorer.vue'
+export { default as SqlEditor } from '@/components/sql-editor/SqlEditor.vue'
+export { default as ValidationPanel } from '@/components/validation-panel/ValidationPanel.vue'
+export { default as WorkbenchLayout } from '@/components/workbench-layout/WorkbenchLayout.vue'

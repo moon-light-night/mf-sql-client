@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package sqlclient.v1;
+
+option go_package = "github.com/sql-client/sql-api/gen/sqlclient/v1;sqlclientv1";
+
+// Validate
+
+message ValidateQueryRequest {
+  string sql = 1;
+}
+
+message ValidateQueryResponse {
+  bool   valid   = 1;
+  string message = 2;
+}
+
+// Execute
+
+message ExecuteQueryRequest {
+  string sql = 1;
+}
+
+message Column {
+  string name      = 1;
+  string data_type = 2;
+}
+
+message Row {
+  repeated string values = 1;
+}
+
+message ExecuteQueryResponse {
+  repeated Column columns      = 1;
+  repeated Row    rows         = 2;
+  int32           rows_count   = 3;
+  int64           duration_ms  = 4;
+}
+
+// Schema
+
+message GetSandboxSchemaRequest {}
+
+message TableInfo {
+  string          table_name = 1;
+  repeated Column columns    = 2;
+}
+
+message GetSandboxSchemaResponse {
+  repeated TableInfo tables = 1;
+}
+
+// History
+
+message ListQueryHistoryRequest {
+  int32 limit  = 1;
+  int32 offset = 2;
+}
+
+message HistoryEntry {
+  string id          = 1;
+  string sql         = 2;
+  bool   success     = 3;
+  string error       = 4;
+  int32  rows_count  = 5;
+  int64  duration_ms = 6;
+  string executed_at = 7;
+}
+
+message ListQueryHistoryResponse {
+  repeated HistoryEntry entries = 1;
+  int32                 total   = 2;
+}
+
+// Service
+
+service SqlClientService {
+  rpc ValidateQuery     (ValidateQueryRequest)      returns (ValidateQueryResponse);
+  rpc ExecuteQuery      (ExecuteQueryRequest)       returns (ExecuteQueryResponse);
+  rpc GetSandboxSchema  (GetSandboxSchemaRequest)   returns (GetSandboxSchemaResponse);
+  rpc ListQueryHistory  (ListQueryHistoryRequest)   returns (ListQueryHistoryResponse);
+}

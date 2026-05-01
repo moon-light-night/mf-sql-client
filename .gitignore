@@ -1,0 +1,42 @@
+# OS
+.DS_Store
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Node
+**/node_modules/
+**/.npm/
+
+# Frontend build outputs
+frontend/apps/host/dist/
+frontend/apps/sql-workbench/dist/
+frontend/apps/**/.vite/
+frontend/apps/**/coverage/
+frontend/apps/**/.vitest/
+
+# TypeScript / Vite logs
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# go
+backend/sql-client/bin/
+backend/sql-client/coverage.out
+backend/sql-client/*.test
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Temp
+*.tmp
+*.swp
+*.swo

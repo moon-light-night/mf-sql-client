@@ -1,0 +1,15 @@
+{
+  "name": "sql-client",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend/apps/*",
+    "frontend/packages/*"
+  ],
+  "scripts": {
+    "dev:host": "npm run dev --workspace=frontend/apps/host",
+    "dev:workbench": "npm run dev --workspace=frontend/apps/sql-workbench",
+    "build": "npm run build --workspace=frontend/packages/frontend-config --workspace=frontend/packages/types --workspace=frontend/packages/api && npm run build --workspace=frontend/apps/sql-workbench && npm run build --workspace=frontend/apps/host",
+    "typecheck": "npm run typecheck --workspace=frontend/apps/host --workspace=frontend/apps/sql-workbench --if-present"
+  }
+}
