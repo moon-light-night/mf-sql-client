@@ -78,8 +78,16 @@ make frontend-dev
 ## Проверки
 
 ```bash
+npm run lint
+npm run lint:fix
+npm run checkTypes
+
 npm run typecheck --workspace=frontend/apps/host
 npm run typecheck --workspace=frontend/apps/sql-workbench
+npm run typecheck --workspace=frontend/packages/api
+npm run typecheck --workspace=frontend/packages/frontend-config
+npm run typecheck --workspace=frontend/packages/types
+
 npm run test --workspace=frontend/apps/sql-workbench
 npm run test --workspace=frontend/packages/api
 ```
