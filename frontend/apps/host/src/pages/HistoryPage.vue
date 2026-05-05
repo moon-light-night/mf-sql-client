@@ -169,12 +169,20 @@ onMounted(() => {
             />
           </template>
         </Column>
-        <Column field="rowsCount" header="Rows" :pt="{ headerCell: { class: 'w-16 text-right' } }">
+        <Column
+          field="rowsCount"
+          header="Rows"
+          :pt="{ headerCell: { class: 'w-16 text-right hidden sm:table-cell' }, bodyCell: { class: 'hidden sm:table-cell' } }"
+        >
           <template #body="{ data }">
             <span class="text-right block text-gray-600 dark:text-gray-100">{{ data.success ? data.rowsCount : '—' }}</span>
           </template>
         </Column>
-        <Column field="durationMs" header="ms" :pt="{ headerCell: { class: 'w-16 text-right' } }">
+        <Column
+          field="durationMs"
+          header="ms"
+          :pt="{ headerCell: { class: 'w-16 text-right hidden sm:table-cell' }, bodyCell: { class: 'hidden sm:table-cell' } }"
+        >
           <template #body="{ data }">
             <span class="text-right block text-gray-500 dark:text-gray-300">{{ data.durationMs }}</span>
           </template>

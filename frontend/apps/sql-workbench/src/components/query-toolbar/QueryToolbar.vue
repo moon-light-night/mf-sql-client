@@ -8,7 +8,7 @@
         {{ WORKBENCH_UI_TEXTS.TITLE }}
       </span>
       <span
-        class="text-[11px] px-2 py-0.5 rounded-md border border-gray-400 dark:border-gray-600
+        class="hidden sm:inline-block text-[11px] px-2 py-0.5 rounded-md border border-gray-400 dark:border-gray-600
                text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700/40 uppercase tracking-wide"
       >
         test

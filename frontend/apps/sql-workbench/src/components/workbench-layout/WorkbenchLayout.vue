@@ -4,7 +4,8 @@
 
     <div class="flex flex-1 min-h-0 overflow-hidden">
 
-      <div class="flex shrink-0 min-h-0">
+      <!-- Schema sidebar: hidden on mobile, visible on desktop -->
+      <div class="schema-sidebar-wrapper shrink-0 min-h-0">
         <aside
           class="flex flex-col border-r border-gray-200 dark:border-gray-700
                  overflow-hidden transition-all duration-200"
@@ -122,3 +123,15 @@ const tabButtonClass = (tabId: ActiveTab): string =>
 const showResultsBadge = (tabId: ActiveTab): boolean =>
   tabId === WORKBENCH_ACTIVE_TAB.RESULTS && Boolean(store.result)
 </script>
+
+<style scoped>
+.schema-sidebar-wrapper {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .schema-sidebar-wrapper {
+    display: flex;
+  }
+}
+</style>

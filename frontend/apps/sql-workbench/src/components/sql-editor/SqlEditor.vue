@@ -10,30 +10,33 @@
           unstyled
           :class="WORKBENCH_BUTTON_STYLES.actionGhost"
           :disabled="clearButtonDisabled"
+          :title="WORKBENCH_UI_TEXTS.ACTION_CLEAR"
           @click="store.clearSql()"
         >
           <i class="pi pi-times text-sm" />
-          <span>{{ WORKBENCH_UI_TEXTS.ACTION_CLEAR }}</span>
+          <span class="hidden sm:inline">{{ WORKBENCH_UI_TEXTS.ACTION_CLEAR }}</span>
         </Button>
         <Button
           type="button"
           unstyled
           :class="WORKBENCH_BUTTON_STYLES.actionSecondary"
           :disabled="validateButtonDisabled"
+          :title="WORKBENCH_UI_TEXTS.ACTION_VALIDATE"
           @click="handleValidate"
         >
           <i :class="validateIconClass" />
-          <span>{{ WORKBENCH_UI_TEXTS.ACTION_VALIDATE }}</span>
+          <span class="hidden sm:inline">{{ WORKBENCH_UI_TEXTS.ACTION_VALIDATE }}</span>
         </Button>
         <Button
           type="button"
           unstyled
           :class="WORKBENCH_BUTTON_STYLES.actionPrimary"
           :disabled="runButtonDisabled"
+          :title="WORKBENCH_UI_TEXTS.ACTION_RUN"
           @click="handleRun"
         >
           <i :class="runIconClass" />
-          <span>{{ WORKBENCH_UI_TEXTS.ACTION_RUN }}</span>
+          <span class="hidden sm:inline">{{ WORKBENCH_UI_TEXTS.ACTION_RUN }}</span>
         </Button>
       </div>
     </div>
@@ -45,7 +48,7 @@
                border border-gray-300 dark:border-gray-700 bg-white dark:bg-transparent 
                text-gray-900 dark:text-gray-100 focus:outline-none
                focus:border-blue-500"
-        rows="9"
+        :rows="isMobile ? 5 : 9"
         :placeholder="DEFAULT_SQL_QUERY"
         :disabled="store.isLoading"
         spellcheck="false"
@@ -64,7 +67,7 @@
 
 <script setup lang="ts">
 import Button from 'primevue/button'
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { WORKBENCH_BUTTON_STYLES } from '@/consts/buttonStyles'
 import { DEFAULT_SQL_QUERY, WORKBENCH_UI_TEXTS } from '@/consts'
 import { useSqlWorkbenchStore } from '@/stores'
@@ -72,6 +75,12 @@ import { useQueryExecution } from '@/composables/index'
 
 const store = useSqlWorkbenchStore()
 const { executeQuery, validateQuery } = useQueryExecution()
+
+const windowWidth = ref(window.innerWidth)
+const onResize = () => { windowWidth.value = window.innerWidth }
+onMounted(() => window.addEventListener('resize', onResize))
+onUnmounted(() => window.removeEventListener('resize', onResize))
+const isMobile = computed<boolean>(() => windowWidth.value < 640)
 
 const hasSql = computed<boolean>(() => store.sql.trim().length > 0)
 const clearButtonDisabled = computed<boolean>(() => !hasSql.value || store.isLoading)
