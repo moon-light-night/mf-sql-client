@@ -2,48 +2,14 @@
 
 SQL Client для безопасного выполнения пользовательских SQL-запросов
 
-## Технологии
+## Архитектура
 
-- Frontend: Vue 3 + Vite + TypeScript + Pinia + Tailwind + PrimeVue
-- Microfrontends: Module Federation
-- Backend: Go + gRPC
-- Прокси: Envoy (gRPC-Web)
-- БД:
-  - `sqlclient_app` — метаданные приложения и история запросов
-  - `sqlclient_sandbox` — песочница для пользовательских SQL-запросов
-
-## Структура репозитория
-
-```text
-sql-client/
-  backend/
-    migrations/
-      init-db/
-    sql-client/
-      cmd/server/
-      gen/
-      internal/
-      migrations/
-  frontend/
-    apps/
-      host/
-      sql-workbench/
-    packages/
-      api/
-      frontend-config/
-      types/
-  infra/
-    envoy/
-  docs/
-    README.md
-    c4-context.md
-    c4-container.md
-    erd.md
-    sequence-diagrams.md
-  proto/
-  docker-compose.yml
-  Makefile
-```
+| Сервис       | Технология                                                         |
+|--------------|--------------------------------------------------------------------|
+| Frontend     | Vue 3 + Vite + TypeScript + Pinia + Tailwind + PrimeVue, Module Federation |
+| API          | Go, gRPC                  |
+| Database     | Postgres 16                                                        |
+| Gateway      | Envoy 1.31.2                                                       |
 
 ## Архитектурная документация
 
@@ -83,27 +49,33 @@ make up
 make down
 ```
 
-## Основные команды Make
+## Переменные окружения
 
-- `make install` — установка npm/go зависимостей
-- `make up` — запуск всех сервисов Docker Compose
-- `make down` — остановка сервисов
-- `make restart` — перезапуск сервисов
-- `make logs` — просмотр логов
-- `make frontend-dev` — локальный запуск frontend dev-серверов
-- `make frontend-build` — сборка frontend-приложений
-- `make backend-run` — запуск go-бекенда локально
-- `make backend-test` — запуск тестов go-бекенда
-- `make proto-gen` — генерация go/TS кода из proto
-- `make db-reset CONFIRM_RESET=1` — полный сброс БД
-- `make db-migrate-up` — применение миграций app DB
-- `make db-migrate-down` — откат последней миграции app DB
-
-## Module Federation
-
-- `host` (порт `5173`) подключает remote `sql-workbench` (порт `5174`)
-- Точка входа remote: `http://localhost:5174/assets/remoteEntry.js`
-- В Docker remote собирается и запускается через `preview`, host работает в dev-режиме
+| Категория | Переменная | Значение | Описание |
+|-----------|------------|----------|----------|
+| **Ports** | `HOST_PORT` | `5173` | Порт для хоста |
+| | `WORKBENCH_PORT` | `5174` | Порт для workbench |
+| | `ENVOY_PORT` | `8080` | Порт Envoy прокси |
+| | `GRPC_PORT` | `9090` | Порт gRPC |
+| **App database** | `APP_DB_HOST` | `postgres-app` | Хост БД |
+| | `APP_DB_PORT` | `5432` | Порт БД (внутренний) |
+| | `APP_DB_HOST_PORT` | `5433` | Порт БД (внешний) |
+| | `APP_DB_NAME` | `sqlclient_app` | Имя БД |
+| | `APP_DB_USER` | `sqlclient` | Пользователь БД |
+| | `APP_DB_PASSWORD` | `change_me` | Пароль БД |
+| | `APP_DB_DSN` | `postgres://sqlclient:change_me@postgres-app:5432/sqlclient_app?sslmode=disable` | DSN для подключения |
+| **Sandbox database** | `SANDBOX_DB_HOST` | `postgres-sandbox` | Хост sandbox БД |
+| | `SANDBOX_DB_PORT` | `5432` | Порт sandbox БД (внутренний) |
+| | `SANDBOX_DB_HOST_PORT` | `5434` | Порт sandbox БД (внешний) |
+| | `SANDBOX_DB_NAME` | `sqlclient_sandbox` | Имя sandbox БД |
+| | `SANDBOX_DB_USER` | `sandbox_user` | Пользователь sandbox БД |
+| | `SANDBOX_DB_PASSWORD` | `change_me` | Пароль sandbox БД |
+| | `SANDBOX_DB_DSN` | `postgres://sandbox_user:change_me@postgres-sandbox:5432/sqlclient_sandbox?sslmode=disable` | DSN для подключения |
+| **SQL execution limits** | `QUERY_TIMEOUT_MS` | `5000` | Таймаут выполнения запроса (мс) |
+| | `MAX_ROWS` | `500` | Максимальное количество строк команды для выполнения |
+| **Frontend** | `VITE_APP_API_URL` | `http://localhost:8080` | URL API для фронтенда |
+| | `VITE_APP_GRPC_WEB_BASE_URL` | `http://localhost:8080` | Base URL для gRPC-web |
+| | `VITE_APP_TITLE` | `SQL Client` | Заголовок приложения |
 
 ## Базы данных
 
